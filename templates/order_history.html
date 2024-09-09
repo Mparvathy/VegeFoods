@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h2 class="order-history-heading">Your Order</h2>
+
+<style>
+    table {
+        margin-left: 100px;
+        margin-right: 30px;
+        width: 80%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f4f4f4;
+        color: #333;
+    }
+    td {
+        background-color: #fff;
+        color: #333;
+    }
+    tr:hover td {
+        background-color: #f1f1f1;
+    }
+    .product-image {
+        width: 100px;
+        height: auto;
+    }
+    .order-history-heading {
+        text-decoration: underline;
+        text-align: center;
+        color: #2c3e50;
+        font-family: 'Arial', sans-serif;
+        font-weight: bold;
+        font-size: 2em;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .empty-message {
+        text-align: center;
+        color: #888;
+        font-size: 1.2em;
+        margin-top: 20px;
+        font-family: 'Arial', sans-serif;
+    }
+</style>
+
+{% if orders %}
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                {% for item in order.orderitem_set.all %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>
+                            {% if item.product %}
+                                <img src="{{ item.product.cover.url }}" alt="{{ item.product.name }}" class="product-image">
+                            {% elif item.veg %}
+                                <img src="{{ item.veg.cover.url }}" alt="{{ item.veg.name }}" class="product-image">
+                            {% elif item.fruit %}
+                                <img src="{{ item.fruit.cover.url }}" alt="{{ item.fruit.name }}" class="product-image">
+                            {% elif item.juice %}
+                                <img src="{{ item.juice.cover.url }}" alt="{{ item.juice.name }}" class="product-image">
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if item.product %}
+                                {{ item.product.name }}
+                            {% elif item.veg %}
+                                {{ item.veg.name }}
+                            {% elif item.fruit %}
+                                {{ item.fruit.name }}
+                            {% elif item.juice %}
+                                {{ item.juice.name }}
+                            {% endif %}
+                        </td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.price }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="empty-message">You have no orders yet.</p>
+{% endif %}
+
+{% endblock %}

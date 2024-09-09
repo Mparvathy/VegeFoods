@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+.cart-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table th, .cart-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.cart-table th {
+    background-color: #f2f2f2;
+}
+
+.cart-table input[type="number"] {
+    width: 50px;
+    text-align: center;
+}
+
+.remove-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    background-color: #c0392b;
+}
+
+.cart-summary {
+    margin-top: 20px;
+    text-align:center;
+}
+
+.checkout-btn:hover {
+    background-color: #2ecc71;
+}
+
+.empty-cart {
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.empty-cart h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.empty-cart p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.empty-cart .btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.cart-summary {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 40px auto;
+}
+
+.summary-details p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.summary-actions {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.checkout-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+</style>
+
+{% if not cart %}
+<div class="empty-cart">
+    <h1 class="text-center">Your Cart is Empty</h1>
+    <p class="text-center">Looks like you haven't added any items to your cart yet.</p>
+    <div class="text-center">
+        <a href="{% url 'shop' %}" class="btn btn-primary">Continue Shopping</a>
+    </div>
+</div>
+{% else %}
+    <div class="cart-container">
+        <h1>Shopping Cart</h1>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                <tr>
+                    <td>
+                        {% if item.product %}
+                            <img src="{{ item.product.cover.url }}" alt="{{ item.product.name }}" class="img-responsive" style="margin-left:-10px;width:100px;height:100px;" />
+                            {{ item.product.name }}
+                        {% elif item.veg %}
+                            <img src="{{ item.veg.cover.url }}" alt="{{ item.veg.name }}" class="img-responsive" style="margin-left:-10px;width:100px;height:100px;" />
+                            {{ item.veg.name }}
+                        {% elif item.fruit %}
+                            <img src="{{ item.fruit.cover.url }}" alt="{{ item.fruit.name }}" class="img-responsive" style="margin-left:-10px;width:100px;height:100px;" />
+                            {{ item.fruit.name }}   
+                        {% elif item.juice %}
+                            <img src="{{ item.juice.cover.url }}" alt="{{ item.juice.name }}" class="img-responsive" style="margin-left:-10px;width:100px;height:100px;" />
+                            {{ item.juice.name }}         
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.product %}
+                            ${{ item.product.price }}
+                        {% elif item.veg %}
+                            ${{ item.veg.price }}
+                        {% elif item.fruit %}
+                            ${{ item.fruit.price }}  
+                        {% elif item.juice %}
+                            ${{ item.juice.price }}          
+                        {% endif %}
+                    </td>
+                    <td>
+                        <p style="margin-left: 12px;"><strong>{{ item.quantity }}</strong></p>
+                    </td>
+                    <td>
+                        {% if item.product %}
+                            ${{ item.subtotal }}
+                        {% elif item.veg %}
+                            ${{ item.subtotal }}
+                        {% elif item.fruit %}
+                            ${{ item.subtotal }}  
+                        {% elif item.juice %}
+                            ${{ item.subtotal }}       
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.product %}
+                            <a href="{% url 'delete' item.product.id 'product' %}"><button class="remove-btn">Remove</button></a>
+                        {% elif item.veg %}
+                            <a href="{% url 'delete' item.veg.id 'veg' %}"><button class="remove-btn">Remove</button></a>
+                        {% elif item.fruit %}
+                            <a href="{% url 'delete' item.fruit.id 'fruit' %}"><button class="remove-btn">Remove</button></a>   
+                            {% elif item.juice %}
+                            <a href="{% url 'delete' item.juice.id 'juice' %}"><button class="remove-btn">Remove</button></a>         
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="cart-summary">
+            <h2>Cart Summary</h2>
+            <div class="summary-details">
+                <p><strong>Subtotal:</strong> ${{ subtotal }}</p>
+                <p><strong>Total:</strong> ${{ total }}</p>
+            </div>
+            <div class="summary-actions">
+                <a href="{% url 'checkout' %}"><button class="checkout-btn">Checkout</button></a>
+                <a href="{% url 'shop' %}" class="btn btn-primary">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

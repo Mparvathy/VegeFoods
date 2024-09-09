@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="text-align: center; margin-bottom: 20px;">
+    Order History for {{ user.full_name }} ({{ user.username }})
+</h1>
+
+<table border="1" cellpadding="10" cellspacing="0" style="width: 70%; margin: 20px auto; font-size: 0.9em; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th>Order ID</th>
+            <th>Total</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.total }}</td>
+                <td>{{ order.address }}</td>
+                <td>
+                    <!-- Link to view order details -->
+                    <a href="{% url 'admin_user_order_detail' order.id %}" style="text-decoration: none; color: blue;">View Details</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4" style="text-align: center; padding: 20px;">No orders found for this user.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

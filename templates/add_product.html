@@ -1,0 +1,155 @@
+<!-- templates/add_product_and_veg.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Add to your CSS file or within a <style> tag in your base.html */
+
+.form-container {
+    border: 1px solid #ddd; /* Light grey border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Space inside the border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for a slight 3D effect */
+    margin-bottom: 20px; /* Space below each form */
+    background-color: #fff; /* Background color for forms */
+}
+
+.form-container h3 {
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+</style>
+<div class="container mt-5" >
+    <h2 class="mb-4"  style="text-align: center; margin-top: -10px;"> ADD THE PRODUCT</h2>
+
+    <div class="row">
+        <!-- Add Product Form -->
+        <div class="col-md-6 mb-4">
+            <h3 class="mb-3">Add New Product</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ product_form.name.label_tag }}
+                    {{ product_form.name }}
+                </div>
+                <div class="form-group">
+                    {{ product_form.cover.label_tag }}
+                    {{ product_form.cover }}
+                </div>
+                <div class="form-group">
+                    {{ product_form.description.label_tag }}
+                    {{ product_form.description }}
+                </div>
+                <div class="form-group">
+                    {{ product_form.price.label_tag }}
+                    {{ product_form.price }}
+                </div>
+                <div class="form-group">
+                    {{ product_form.sold.label_tag }}
+                    {{ product_form.sold }}
+                </div>
+                <button type="submit" class="btn btn-primary" name="product">Add Product</button>
+            </form>
+        </div>
+
+        <!-- Add Vegetable Form -->
+        <div class="col-md-6 mb-4">
+            <h3 class="mb-3">Add New Vegetable</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ veg_form.name.label_tag }}
+                    {{ veg_form.name }}
+                </div>
+                <div class="form-group">
+                    {{ veg_form.cover.label_tag }}
+                    {{ veg_form.cover }}
+                </div>
+                <div class="form-group">
+                    {{ veg_form.description.label_tag }}
+                    {{ veg_form.description }}
+                </div>
+                <div class="form-group">
+                    {{ veg_form.price.label_tag }}
+                    {{ veg_form.price }}
+                </div>
+                <div class="form-group">
+                    {{ veg_form.sold.label_tag }}
+                    {{ veg_form.sold }}
+                </div>
+                <button type="submit" class="btn btn-success" name="veg">Add Vegetable</button>
+            </form>
+        </div>
+        
+       
+        
+        <!-- Add Vegetable Form -->
+        <div class="col-md-6 mb-4">
+            <h3 class="mb-3">Add New Fruits</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ fruit_form.name.label_tag }}
+                    {{ fruit_form.name }}
+                </div>
+                <div class="form-group">
+                    {{fruit_form.cover.label_tag }}
+                    {{ fruit_form.cover }}
+                </div>
+                <div class="form-group">
+                    {{ fruit_form.description.label_tag }}
+                    {{ fruit_form.description }}
+                </div>
+                <div class="form-group">
+                    {{ fruit_form.price.label_tag }}
+                    {{ fruit_form.price }}
+                </div>
+                <div class="form-group">
+                    {{ fruit_form.sold.label_tag }}
+                    {{ fruit_form.sold }}
+                </div>
+                <button type="submit" class="btn btn-success" name="fruit">Add Fruits</button>
+            </form>
+        </div>
+   
+<!-- Add Juice Form -->
+<div class="col-md-6 mb-4">
+    <h3 class="mb-3">Add New Juice</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ juice_form.name.label_tag }}
+            {{ juice_form.name }}
+        </div>
+        <div class="form-group">
+            {{ juice_form.cover.label_tag }}
+            {{ juice_form.cover }}
+        </div>
+        <div class="form-group">
+            {{ juice_form.description.label_tag }}
+            {{ juice_form.description }}
+        </div>
+        <div class="form-group">
+            {{ juice_form.price.label_tag }}
+            {{ juice_form.price }}
+        </div>
+        <div class="form-group">
+            {{ juice_form.sold.label_tag }}
+            {{ juice_form.sold }}
+        </div>
+        <button type="submit" class="btn btn-success" name="juice">Add Juice</button>
+    </form>
+</div>
+
+
+
+
+
+
+    </div>
+</div>
+<br>
+<br>
+
+{% endblock %}

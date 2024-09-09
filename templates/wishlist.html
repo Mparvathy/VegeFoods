@@ -1,0 +1,346 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="hero-wrap hero-bread" style="background-image: url('/static/images/bg_1.jpg');">
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate text-center">
+          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span></p>
+          <h1 class="mb-0 bread">Products</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<style>
+    .empty-wishlist .btn-primary {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+    }
+
+    .empty-wishlist .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .shopping-cart .actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .shopping-cart .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        width: 100px;
+    }
+
+    .shopping-cart .btn-primary:hover,
+    .shopping-cart .btn-danger:hover {
+        opacity: 0.9;
+    }
+
+    .empty-wishlist {
+        padding: 50px 0;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .empty-wishlist p {
+        font-size: 18px;
+        color: #888;
+        margin-bottom: 20px;
+    }
+
+    .empty-wishlist .btn-primary {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .shopping-cart .cart-header {
+        padding: 10px;
+    }
+
+    .shopping-cart .cart-header h4 {
+        font-size: 18px;
+        margin-bottom: 0px;
+    }
+
+    .shopping-cart .cart-item a {
+        text-decoration: none;
+    }
+
+    .shopping-cart .cart-item {
+        background-color: #fff;
+        box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
+        padding: 10px;
+        margin-top: 10px;
+    }
+
+    .shopping-cart .cart-item .item-name {
+        font-size: 16px;
+        font-weight: 600;
+        width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .shopping-cart .cart-item .price {
+        font-size: 16px;
+        font-weight: 600;
+        padding: 4px 2px;
+        margin-left: 10px;
+    }
+
+    .shopping-cart .btn1 {
+        border: 1px solid;
+        margin-right: 3px;
+        border-radius: 0px;
+        font-size: 10px;
+        width: 100px;
+    }
+
+    .shopping-cart .btn1:hover {
+        background-color: #2874f0;
+        color: #fff;
+    }
+
+    .shopping-cart .input-quantity {
+        border: 1px solid #000;
+        margin-right: 3px;
+        font-size: 12px;
+        width: 40%;
+        outline: none;
+        text-align: center;
+    }
+
+    @media (max-width: 767px) {
+        .shopping-cart .cart-header {
+            display: none;
+        }
+
+        .shopping-cart .cart-item {
+            padding: 5px;
+        }
+
+        .shopping-cart .cart-item .item-name img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .shopping-cart .cart-item .price,
+        .shopping-cart .cart-item .quantity,
+        .shopping-cart .cart-item .remove {
+            font-size: 14px;
+        }
+    }
+    .shopping-cart .cart-item .item-name {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust the gap between the image, remove link, and name */
+}
+
+.shopping-cart .cart-item .item-name a {
+    margin-right: 10px; /* Space between the remove link and image */
+    font-size: 16px;
+    color: #ff0000; /* Change to your preferred color */
+    text-decoration: none;
+}
+
+.shopping-cart .cart-item img {
+    margin-right: 10px; /* Space between the image and product name */
+    border-radius: 4px; /* Optional: adds a rounded border to the image */
+}
+
+.shopping-cart .cart-item .item-name span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+</style>
+
+{% if products or veg_items or fruit_items  or juice_items %}
+<div class="py-3 py-md-5 ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="shopping-cart">
+                    <h1  style="text-align: center; text-decoration: underline;"> MY WISHLIST</h1>
+                    <!-- Cart Header -->
+                    <div class="cart-header d-none d-sm-none d-mb-block d-lg-block">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Items</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Price</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Quantity</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Actions</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Items -->
+                    {% for item in products %}
+                    <div class="cart-item">
+                        <div class="row">
+                            <div class="col-md-6 my-auto">
+                                <label class="item-name">
+                                    <a href="{% url 'remove_from_wishlist' item.product.id 'product' %}" >
+                                        x
+                                    </a>
+                                    <img src="{{ item.product.cover.url }}" style="width: 50px; height: 50px" alt="">
+                                    {{ item.product.name }}
+                                </label>
+                            </div>
+                            <div class="col-md-2 my-auto">
+                                <label class="price">{{ item.product.price }}</label>
+                            </div>
+                            <div class="col-md-2 col-7 my-auto">
+                                <div class="quantity">
+                                    <div class="input-group">
+                                        {{ item.quantity }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-5 my-auto">
+                                <div class="actions">
+                                    <a href="{% url 'add_to_cart' item.product.id 'product' %}" class="btn btn-primary btn-sm">
+                                        Add to Cart
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <!-- Vegetable Items -->
+                    {% for item in veg_items %}
+                    <div class="cart-item">
+                        <div class="row">
+                            <div class="col-md-6 my-auto">
+                                <label class="item-name">
+                                    <a href="{% url 'remove_from_wishlist' item.veg.id 'veg' %}" >
+                                        x
+                                    </a>
+                                    <img src="{{ item.veg.cover.url }}" style="width: 50px; height: 50px" alt="">
+                                    {{ item.veg.name }}
+                                </label>
+                            </div>
+                            <div class="col-md-2 my-auto">
+                                <label class="price">{{ item.veg.price }}</label>
+                            </div>
+                            <div class="col-md-2 col-7 my-auto">
+                                <div class="quantity">
+                                    <div class="input-group">
+                                        {{ item.quantity }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-5 my-auto">
+                                <div class="actions">
+                                    <a href="{% url 'add_to_cart' item.veg.id 'veg' %}" class="btn btn-primary btn-sm">
+                                        Add to Cart
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                     <!-- Vegetable Items -->
+                     
+                     {% for item in fruit_items %}
+                     <div class="cart-item">
+                         <div class="row">
+                             <div class="col-md-6 my-auto">
+                                 <label class="item-name">
+                                     <a href="{% url 'remove_from_wishlist' item.fruit.id 'fruit' %}" >
+                                         x
+                                     </a>
+                                     <img src="{{ item.fruit.cover.url }}" style="width: 50px; height: 50px" alt="">
+                                     {{ item.fruit.name }}
+                                 </label>
+                             </div>
+                             <div class="col-md-2 my-auto">
+                                 <label class="price">{{ item.fruit.price }}</label>
+                             </div>
+                             <div class="col-md-2 col-7 my-auto">
+                                 <div class="quantity">
+                                     <div class="input-group">
+                                         {{ item.quantity }}
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-2 col-5 my-auto">
+                                 <div class="actions">
+                                     <a href="{% url 'add_to_cart' item.fruit.id  'fruit' %}" class="btn btn-primary btn-sm">
+                                         Add to Cart
+                                     </a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     {% endfor %}
+                     {% for item in juice_items %}
+                     <div class="cart-item">
+                         <div class="row">
+                             <div class="col-md-6 my-auto">
+                                 <label class="item-name">
+                                     <a href="{% url 'remove_from_wishlist' item.juice.id 'juice' %}" >
+                                         x
+                                     </a>
+                                     <img src="{{ item.juice.cover.url }}" style="width: 50px; height: 50px" alt="">
+                                     {{ item.juice.name }}
+                                 </label>
+                             </div>
+                             <div class="col-md-2 my-auto">
+                                 <label class="price">{{ item.juice.price }}</label>
+                             </div>
+                             <div class="col-md-2 col-7 my-auto">
+                                 <div class="quantity">
+                                     <div class="input-group">
+                                         {{ item.quantity }}
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-2 col-5 my-auto">
+                                 <div class="actions">
+                                     <a href="{% url 'add_to_cart' item.juice.id  'juice' %}" class="btn btn-primary btn-sm">
+                                         Add to Cart
+                                     </a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     {% endfor %}
+                     
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="empty-wishlist text-center">
+    <p>Your wishlist is empty.</p>
+    <a href="{% url 'shop' %}" class="btn btn-primary">Start Shopping</a>
+</div>
+{% endif %}
+
+{% endblock %}

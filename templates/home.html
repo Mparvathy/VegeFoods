@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}  
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-VTr4p5kml4OT3DgShGdFbG0EGYoElWkW7X+1y8+Wm6gFH4ik2CkDlY05iTykZR0UVQqPYe3mHPJYbF4K6cfTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <section id="home-section" class="hero">
+		  <div class="home-slider owl-carousel">
+	      <div class="slider-item" style="background-image: url('/static/images/bg_1.jpg');">
+	      	<div class="overlay"></div>
+	        <div class="container">
+	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+	            <div class="col-md-12 ftco-animate text-center">
+	              <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
+	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
+	              <p><a href="#" class="btn btn-primary">View Details</a></p>
+	            </div>
+
+	          </div>
+	        </div>
+	      </div>
+
+	      <div class="slider-item" style="background-image: url('/static/images/bg_2.jpg');">
+	      	<div class="overlay"></div>
+	        <div class="container">
+	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+	            <div class="col-sm-12 ftco-animate text-center">
+	              <h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
+	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
+	              <p><a href="#" class="btn btn-primary">View Details</a></p>
+	            </div>
+
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+    </section>
+  <h1 style="margin-left: 90px; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;text-decoration: underline;"> Welcome Vegefood ! </h1>
+  <p style="width: 500px; margin-left: 30px;">Vegefoods is an excellent fruit and vegetable website template for crafting a modern webspace. If you would like to sell products online, start the journey to creating a top-notch eCommerce website with Vegefoods. The layout has a clean and minimal web design, pushing products right in front of their eyes. There are loads of premium-like features to Vegefoods which will get you going in close to no time. The tool is also organized and simple to use, ensuring you get the most out of it without sweat.
+	From full-width slider and call-to-action buttons to sticky menu, hover effects, countdown timer for special deals and testimonials, Vegefoods sports it all and then some. Along with the enticing home page, you will also find cart, checkout, wishlist, blog, and contact sections. Start selling fruits and vegetables online with the power of Vegefoods.</p>
+	<img src ="{%   static 'images/image_1.jpg'  %}" style="margin-top:-400px;float: right;  margin-right:200px;width:400px; height:400px;">
+    <!-- Start Section -->
+    <section class="container py-5">
+        <div class="row text-center pt-5 pb-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">OUR SERVICES </h1>
+                <p>
+             We provide te 24*7 services and have experinced salesman
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center"><i class="fa fa-truck fa-lg"></i></div>
+                    <h2 class="h5 mt-4 text-center">Delivery Services</h2>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center"><i class="fa fa-exchange"></i></div>
+                    <h2 class="h5 mt-4 text-center">Shipping & Return</h2>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center"><i class="fa fa-percent"></i></div>
+                    <h2 class="h5 mt-4 text-center">Promotion</h2>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center"><i class="fa fa-user"></i></div>
+                    <h2 class="h5 mt-4 text-center">24 Hours Service</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Section -->
+
+    <section class="ftco-section">
+    	<div class="container">
+				<div class="row justify-content-center mb-3 pb-3">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+          	<span class="subheading">Featured Products</span>
+            <h2 class="mb-4" style="text-decoration: underline;">OUR PRODUCTS </h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+          </div>
+        </div>   		
+    	</div>
+    	<div class="container">
+    		<div class="row">    				
+				{% for i in b %} 
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="{{i.cover.url}}" alt="Colorlib Template"style="height: 200px; width: 400px;">
+    						<div class="overlay"></div>
+    					</a>
+    					<div class="text py-3 pb-4 px-3 text-center">
+    						<h3><a href="#">{{i.name}}</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price"><span>${{i.price}}</span></p>
+		    					</div>
+	    					</div>
+    						<div class="bottom-area d-flex px-3">
+	    						<div class="m-auto d-flex">
+	    							<a href="{%  url 'view' i.id %}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+	    								<span><i class="ion-ios-menu"></i></span>
+	    							</a>
+	    							<a href="{% url 'add_to_cart' i.id 'product' %}" class="buy-now d-flex justify-content-center align-items-center mx-1">
+	    								<span><i class="ion-ios-cart"></i></span>
+	    							</a>
+	    							<a href="{%  url 'add_to_wishlist' i.id  'product'  %}" class="heart d-flex justify-content-center align-items-center ">
+	    								<span><i class="ion-ios-heart"></i></span>
+	    							</a>
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+				{% endfor %}
+    		</div>
+    	</div>
+    </section>
+		
+		<section class="ftco-section img" style="background-image: url('/static/images/bg_3.jpg');">
+    	<div class="container">
+				<div class="row justify-content-end">
+          <div class="col-md-6 heading-section ftco-animate deal-of-the-day ftco-animate">
+          	<span class="subheading">Best Price For You</span>
+            <h2 class="mb-4">Deal of the day</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+            <h3><a href="#">Spinach</a></h3>
+            <span class="price">$10 <a href="#">now $5 only</a></span>
+            <div id="timer" class="d-flex mt-5">
+						  <div class="time" id="days" ></div>
+						  <div class="time pl-3" id="hours"></div>
+						  <div class="time pl-3" id="minutes"></div>
+						  <div class="time pl-3" id="seconds"></div>
+						</div>
+          </div>
+        </div>   		
+    	</div>
+    </section>
+
+			<div class="row justify-content-center mb-1 pb-3">
+  <div class="col-md-12 heading-section text-center ftco-animate">
+		<h2 class="mb-2" style="text-decoration: underline;">Our Partners </h2>
+	  </div>
+</div>   		
+		<section class="ftco-section ftco-partner"style="margin-bottom:-6px;">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-sm ftco-animate">
+    				<a href="#" class="partner"><img src="{% static 'images/partner-1.png' %}" class="img-fluid" alt="Colorlib Template"></a>
+    			</div>
+    			<div class="col-sm ftco-animate">
+    				<a href="#" class="partner"><img src="{% static 'images/partner-2.png' %}" class="img-fluid" alt="Colorlib Template"></a>
+    			</div>
+    			<div class="col-sm ftco-animate">
+    				<a href="#" class="partner"><img src="{% static 'images/partner-3.png' %}" class="img-fluid" alt="Colorlib Template"></a>
+    			</div>
+    			<div class="col-sm ftco-animate">
+    				<a href="#" class="partner"><img src="{% static 'images/partner-4.png' %}" class="img-fluid" alt="Colorlib Template"></a>
+    			</div>
+    			<div class="col-sm ftco-animate">
+    				<a href="#" class="partner"><img src="{% static 'images/partner-5.png' %}" class="img-fluid" alt="Colorlib Template"></a>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+
+	<section id="specials-grid" class="month-specials" data-scroll-reveal="enter from the bottom after 0.9s">
+        <div class="container">
+            <h1 class="header-txt">This month specials</h1>
+            <div class="divider">
+                <?xml version="1.0" encoding="utf-8"?>
+                <!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1930 255.5" style="enable-background:new 0 0 1930 255.5;" xml:space="preserve">
+                                <style type="text/css">
+                                    .st0{fill:none;stroke:#3c3c3c;stroke-width:10;stroke-linecap:square;stroke-miterlimit:10;}
+                                </style>
+                                <polyline class="st0" points="1224,171.8 1181.3,171.8 1139.2,129.6 1065,203.9 970.5,110.4 876,203.6 801.8,129.4 759.7,171.5 
+                                    717,171.5 "/>
+                                <polyline class="st0" points="5,131.5 757.3,131.5 801.8,176.1 885.9,91.9 868.3,74.2 831.5,111 870.4,149.9 970.2,50.2 1070,149.9 
+                                    1108.8,111 1072.1,74.2 1054.4,91.9 1138.5,176.1 1183.1,131.5 1925,131.5 "/>
+                                <rect x="921.9" y="26.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 231.426 707.2043)" class="st0" width="95" height="95"/>
+                                <rect x="921.9" y="99.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 179.8072 728.5855)" class="st0" width="95" height="95"/>
+                                <rect x="940.3" y="178.1" transform="matrix(0.7071 -0.7071 0.7071 0.7071 137.3893 746.1556)" class="st0" width="58.2" height="58.2"/>
+                                </svg>
+            </div>
+            <!--.divider-->
+            <div class="specials-content">
+                <div class="special">
+                    <div class="special-img img-01">
+                        <img src="{% static 'special/assets/img/special-1.png' %}" />
+                    </div>
+                    <div class="special-items spec-01">
+                        <h2 class="scroll-reveal" data-origin="top" data-distance="20%">Greens fava</h2>
+                        <span class="line scroll-reveal" data-origin="top" data-distance="20%"></span>
+                        <p class="scroll-reveal" data-origin="bottom" data-distance="30%">Nori grape silver beet broccoli kombu beet greens fava</p>
+                        <span class="scroll-reveal" data-origin="bottom" data-distance="60%">19$</span>
+                    </div>
+                </div>
+                <!--.special-->
+                <div class="special">
+                    <div class="special-img img-02">
+                        <img src="{% static 'special/assets/img/special-2.png' %}" />
+                    </div>
+                    <div class="special-items spec-02">
+                        <h2 class="scroll-reveal" data-origin="top" data-distance="20%">Celery quand</h2>
+                        <span class="line scroll-reveal" data-origin="top" data-distance="20%"></span>
+                        <p class="scroll-reveal" data-origin="bottom" data-distance="30%">Celery quandong swiss chard chicory earthnut pea</p>
+                        <span class="scroll-reveal" data-origin="bottom" data-distance="60%">18$</span>
+                    </div>
+                </div>
+                <!--.special-->
+                <div class="special">
+                    <div class="special-img img-03">
+                        <img src="{% static 'special/assets/img/special-3.png' %}" />
+                    </div>
+                    <div class="special-items spec-03">
+                        <h2 class="scroll-reveal" data-origin="top" data-distance="20%">Pea horser</h2>
+                        <span class="line scroll-reveal" data-origin="top" data-distance="20%"></span>
+                        <p class="scroll-reveal" data-origin="bottom" data-distance="30%">Kohlrabi radish okra azuki bean corn fava bean mustard</p>
+                        <span class="scroll-reveal" data-origin="bottom" data-distance="60%">7$</span>
+                    </div>
+                </div>
+                <!--.special-->
+                <div class="special">
+                    <div class="special-items spec-04">
+                        <h2 class="scroll-reveal" data-origin="top" data-distance="20%">Soko radicchio</h2>
+                        <span class="line scroll-reveal" data-origin="top" data-distance="20%"></span>
+                        <p class="scroll-reveal" data-origin="bottom" data-distance="30%">Dandelion zucchini burdock yarrow chickpea dandelion</p>
+                        <span class="scroll-reveal" data-origin="bottom" data-distance="60%">25$</span>
+                    </div>
+                    <div class="special-img img-04">
+                        <img src="{% static 'special/assets/img/special-4.png' %}" />
+                    </div>
+                </div>
+                <!--.special-->
+                <div class="special">
+                    <div class="special-items spec-05">
+                        <h2 class="scroll-reveal" data-origin="top" data-distance="20%">Tigernut</h2>
+                        <span class="line scroll-reveal" data-origin="top" data-distance="20%"></span>
+                        <p class="scroll-reveal" data-origin="bottom" data-distance="30%">Grape silver beet watercress potato tigernut</p>
+                        <span class="scroll-reveal" data-origin="bottom" data-distance="60%">14$</span>
+                    </div>
+                    <div class="special-img img-05">
+                        <img src="{% static 'special/assets/img/special-5.png' %}" />
+                    </div>
+                </div>
+                <!--.special-->
+                <div class="special">
+                    <div class="special-items spec-06">
+                        <h2 class="scroll-reveal" data-origin="top" data-distance="20%">Yarrow sweet</h2>
+                        <span class="line scroll-reveal" data-origin="top" data-distance="20%"></span>
+                        <p class="scroll-reveal" data-origin="bottom" data-distance="30%">Gumbo kakadu plum komatsuna black-eyed pea green</p>
+                        <span class="scroll-reveal" data-origin="bottom" data-distance="60%">8$</span>
+                    </div>
+                    <div class="special-img img-06">
+                        <img src="{% static 'special/assets/img/special-6.png' %}" />
+                    </div>
+                </div>
+                <!--.special-->
+            </div>
+            <!--.specials-content-->
+        </div>
+        <!--.container-->
+    </section>
+    <!--.month-specials-->
+    
+	{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>All User Orders</h1>
+
+<table border="1" cellpadding="10" cellspacing="0" style="width: 50%; margin: 20px auto; font-size: 0.9em;">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user, orders in grouped_orders.items %}
+        <tr>
+            <td>
+                {{ user.full_name }}
+            </td>
+            <td>
+                <a href="{% url 'admin_user_order_history' user.id %}">View Order History</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

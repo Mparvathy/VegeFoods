@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  .profile-container {
+    display: flex;
+    align-items: center;
+  margin-left:400px;
+    text-align: left;
+    margin-top:-50px;
+
+  }
+  .profile-icon {
+    margin-right: 20px;
+  }
+  .profile-details {
+    max-width: 400px;
+  }
+  .profile-icon img {
+    border-radius: 50%;
+    width: 300px; /* Adjust as needed */
+    height: 500px; /* Adjust as needed */
+  }
+</style>
+<div class="profile-container">
+  <div class="profile-icon">
+    <img src="https://t3.ftcdn.net/jpg/06/19/26/46/360_F_619264680_x2PBdGLF54sFe7kTBtAvZnPyXgvaRw0Y.jpg" alt="Profile Icon">
+  </div>
+  <div class="profile-details">
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Full Name:</strong> {{ user.full_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone:</strong> {{ user.phone }}</p>
+    <a href="{% url 'edit_user_profile' %}">Edit Profile</a>
+  </div>
+</div>
+
+<br>
+<br</br>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Order Items</h2>
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order_items %}
+            <tr>
+                <td>
+                    {% if item.product %}
+                        <img src="{{ item.product.cover.url }}" alt="{{ item.product.name }}" style="width: 100px; height: auto;">
+                    {% elif item.veg %}
+                        <img src="{{ item.veg.cover.url }}" alt="{{ item.veg.name }}" style="width: 100px; height: auto;">
+                    {% elif item.fruit %}
+                        <img src="{{ item.fruit.cover.url }}" alt="{{ item.fruit.name }}" style="width: 100px; height: auto;">
+                    {% elif item.juice %}
+                        <img src="{{ item.juice.cover.url }}" alt="{{ item.juice.name }}" style="width: 100px; height: auto;">
+                    {% endif %}
+                </td>
+                <td>
+                    {% if item.product %}
+                        Product: {{ item.product.name }}
+                    {% elif item.veg %}
+                        Vegetable: {{ item.veg.name }}
+                    {% elif item.fruit %}
+                        Fruit: {{ item.fruit.name }}
+                    {% elif item.juice %}
+                        Juice: {{ item.juice.name }}
+                    {% endif %}
+                </td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
